@@ -7,7 +7,7 @@ for i in [2..n] by 1
         primes.push i
         if primes.length is 10001
             console.log i
-            process.exit
+            process.exit()
     for p in primes
         break if i * p > n
         isnt_prime[i * p] = true

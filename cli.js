@@ -25,7 +25,8 @@ function start_problem(problem_id) {
     const template_code = [
         'function main() {',
         '}',
-        'exports.main = main'].join('\n')
+        'exports.main = main',
+        'if (require.main == module) main()'].join('\n')
 
     fs.writeFile(problem_id + '/index.js', template_code)
 }

@@ -29,29 +29,29 @@ MAX_SUM = 10 ** 13
 fib = [1, 2]
 
 @lru_cache
-def dfs(i, left):
+def dfs(n, left):
     # fib array can not be in the signature cuz lru_cache doesn't support array
     global fib
 
     if left == 0:  # nothing can be selected
         return 1
 
-    if i == 0:  # I doubt we will reach here.
+    if n == 0:  # I doubt we will reach here.
         return 1
 
-    sum_left = fib[i - 1] + (fib[i] - 2)
+    sum_left = fib[n - 1] + (fib[n] - 2)
 
     res = 0
     for opt in range(2):
-        current = fib[i] if opt == 1 else 0
+        current = fib[n] if opt == 1 else 0
         if current > left:
             break
 
         # important prune
         if current + sum_left <= left:
-            res += 1 << i
+            res += 1 << n
         else:
-            res += dfs(i - 1, left - current)
+            res += dfs(n - 1, left - current)
 
     return res
     
@@ -74,7 +74,6 @@ def main():
     print('S({}) = {}'.format(100, dfs(fib_n - 1, 100)))
     print('S({}) = {}'.format(10000, dfs(fib_n - 1, 10 ** 4)))
     print('S({}) = {}'.format(10 ** 13, dfs(fib_n - 1, 10 ** 13))) 
-    print('S({}) = {}'.format(MAX_SUM, dfs(fib_n - 1, MAX_SUM))) 
 
 
 if __name__ == '__main__':
